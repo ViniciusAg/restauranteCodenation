@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RestauranteCodenation.Data.Repositorio
 {
-    class PratosIngredientesRepositorio : RepositorioBase<PratosIngredientes>
+    public class PratosIngredientesRepositorio : RepositorioBase<PratosIngredientes>
     {
     }
 }
