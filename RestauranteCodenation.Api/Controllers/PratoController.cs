@@ -26,7 +26,7 @@ namespace RestauranteCodenation.Api.Controllers
         }
 
         // GET: api/Prato/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public Prato Get(int id)
         {
             return _repo.SelecionarPorId(id);

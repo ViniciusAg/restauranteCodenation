@@ -26,7 +26,7 @@ namespace RestauranteCodenation.Api.Controllers
         }
 
         // GET: api/Cardapio/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public Cardapio Get(int id)
         {
             return _repo.SelecionarPorId(id);
