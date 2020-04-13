@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RestauranteCodenation.Data.Repositorio
 {
-    public class RepositorioBase<T> where T : class, IEntity
+    public class RepositorioBase<T> : IRepositorioBase<T>  where T : class, IEntity
     {
         protected readonly Contexto _contexto;
         public RepositorioBase()
@@ -42,5 +42,9 @@ namespace RestauranteCodenation.Data.Repositorio
             return _contexto.Set<T>().ToList();
         }
 
+        public void Dispose()
+        {
+           _contexto.Dispose();
+        }
     }
 }

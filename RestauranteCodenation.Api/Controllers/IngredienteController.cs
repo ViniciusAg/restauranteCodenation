@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
+using RestauranteCodenation.Domain.Repositorio;
 
 namespace RestauranteCodenation.Api.Controllers
 {
@@ -14,10 +15,10 @@ namespace RestauranteCodenation.Api.Controllers
     public class IngredienteController : ControllerBase
     {
         // repositorio mesmo nome da controller: _repo
-        private readonly IngredienteRepositorio _repo;
-        public IngredienteController()
+        private readonly IIngredienteRepositorio _repo;
+        public IngredienteController(IIngredienteRepositorio repo)
         {
-            _repo = new IngredienteRepositorio();
+            _repo = repo;
 
         }
         // GET: api/Ingrediente

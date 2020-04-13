@@ -14,8 +14,8 @@ namespace RestauranteCodenation.Data
         public DbSet<Prato> Prato { get; set; }
         public DbSet<TipoPrato> TipoPrato { get; set; }
         public DbSet<Agenda> Agenda { get; set; }
-        public List<PratosIngredientes> PratosIngredientes { get; set; }
-        public List<AgendaCardapio> AgendaCardapio { get; set; }
+        public DbSet<PratosIngredientes> PratosIngredientes { get; set; }
+        public DbSet<AgendaCardapio> AgendaCardapio { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-NVE37DN\SQLEXPRESS;Database=Codenation;Trusted_Connection=True;");
