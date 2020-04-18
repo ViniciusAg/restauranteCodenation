@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -14,28 +16,28 @@ namespace RestauranteCodenation.Api.Controllers
     [ApiController]
     public class AgendaCardapioController : ControllerBase
     {
-        private readonly IAgendaCardapioRepositorio _repo;
-        public AgendaCardapioController(IAgendaCardapioRepositorio repo)
+        private readonly IAgendaCardapioAplicacao _repo;
+        public AgendaCardapioController(IAgendaCardapioAplicacao repo)
         {
             _repo = repo;
         }
         // GET: api/AgendaCardapio
         [HttpGet]
-        public IEnumerable<AgendaCardapio> Get()
+        public IEnumerable<AgendaCardapioViewModel> Get()
         {
             return _repo.SelecionarTodos();
         }
 
         // GET: api/AgendaCardapio/5
         [HttpGet("{id}")]
-        public AgendaCardapio Get(int id)
+        public AgendaCardapioViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/AgendaCardapio
         [HttpPost]
-        public AgendaCardapio Post([FromBody] AgendaCardapio agendaCardapio)
+        public AgendaCardapioViewModel Post([FromBody] AgendaCardapioViewModel agendaCardapio)
         {
             _repo.Incluir(agendaCardapio);
             return agendaCardapio;
@@ -43,7 +45,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/AgendaCardapio/5
         [HttpPut("{id}")]
-        public AgendaCardapio Put(int id, [FromBody] AgendaCardapio agendaCardapio)
+        public AgendaCardapioViewModel Put(int id, [FromBody] AgendaCardapioViewModel agendaCardapio)
         {
             _repo.Alterar(agendaCardapio);
             return agendaCardapio;
@@ -51,7 +53,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<AgendaCardapio> Delete(int id)
+        public List<AgendaCardapioViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -14,28 +16,28 @@ namespace RestauranteCodenation.Api.Controllers
     [ApiController]
     public class AgendaController : ControllerBase
     {
-        private readonly IAgendaRepositorio _repo;
-        public AgendaController(IAgendaRepositorio repo)
+        private readonly IAgendaAplicacao _repo;
+        public AgendaController(IAgendaAplicacao repo)
         {
             _repo = repo;
         }
         // GET: api/Agenda
         [HttpGet]
-        public IEnumerable<Agenda> Get()
+        public IEnumerable<AgendaViewModel> Get()
         {
             return _repo.SelecionarTodos();
         }
 
         // GET: api/Agenda/5
         [HttpGet("{id}")]
-        public Agenda Get(int id)
+        public AgendaViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/Agenda
         [HttpPost]
-        public Agenda Post([FromBody] Agenda agenda)
+        public AgendaViewModel Post([FromBody] AgendaViewModel agenda)
         {
             _repo.Incluir(agenda);
             return agenda;
@@ -43,7 +45,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/Agenda/5
         [HttpPut("{id}")]
-        public Agenda Put(int id, [FromBody] Agenda agenda)
+        public AgendaViewModel Put(int id, [FromBody] AgendaViewModel agenda)
         {
             _repo.Alterar(agenda);
             return agenda;
@@ -51,7 +53,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<Agenda> Delete(int id)
+        public List<AgendaViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

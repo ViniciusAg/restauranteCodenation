@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RestauranteCodenation.Domain
+namespace RestauranteCodenation.Application.ViewModel
 {
     public class IngredienteViewModel
     {

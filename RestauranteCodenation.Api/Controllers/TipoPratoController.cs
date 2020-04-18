@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -14,28 +16,28 @@ namespace RestauranteCodenation.Api.Controllers
     [ApiController]
     public class TipoPratoController : ControllerBase
     {
-        private readonly ITipoPratoRepositorio _repo;
-        public TipoPratoController(ITipoPratoRepositorio repo)
+        private readonly ITipoPratoAplicacao _repo;
+        public TipoPratoController(ITipoPratoAplicacao repo)
         {
             _repo = repo;
         }
         // GET: api/TipoPrato
         [HttpGet]
-        public IEnumerable<TipoPrato> Get()
+        public IEnumerable<TipoPratoViewModel> Get()
         {
             return _repo.SelecionarTodos();
         }
 
         // GET: api/TipoPrato/5
         [HttpGet("{id}")]
-        public TipoPrato Get(int id)
+        public TipoPratoViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/TipoPrato
         [HttpPost]
-        public TipoPrato Post([FromBody] TipoPrato tipoPrato)
+        public TipoPratoViewModel Post([FromBody] TipoPratoViewModel tipoPrato)
         {
             _repo.Incluir(tipoPrato);
             return tipoPrato;
@@ -43,7 +45,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/TipoPrato/5
         [HttpPut("{id}")]
-        public TipoPrato Put(int id, [FromBody] TipoPrato tipoPrato)
+        public TipoPratoViewModel Put(int id, [FromBody] TipoPratoViewModel tipoPrato)
         {
             _repo.Alterar(tipoPrato);
             return tipoPrato;
@@ -51,7 +53,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<TipoPrato> Delete(int id)
+        public List<TipoPratoViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

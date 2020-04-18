@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -14,28 +16,28 @@ namespace RestauranteCodenation.Api.Controllers
     [ApiController]
     public class PratoController : ControllerBase
     {
-        private readonly IPratoRepositorio _repo;
-        public PratoController(IPratoRepositorio repo)
+        private readonly IPratoAplicacao _repo;
+        public PratoController(IPratoAplicacao repo)
         {
             _repo = repo;
         }
         // GET: api/Prato
         [HttpGet]
-        public IEnumerable<Prato> Get()
+        public IEnumerable<PratoViewModel> Get()
         {
             return _repo.SelecionarTodos();
         }
 
         // GET: api/Prato/5
         [HttpGet("{id}")]
-        public Prato Get(int id)
+        public PratoViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/Prato
         [HttpPost]
-        public Prato Post([FromBody] Prato prato)
+        public PratoViewModel Post([FromBody] PratoViewModel prato)
         {
             _repo.Incluir(prato);
             return prato;
@@ -43,7 +45,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/Prato/5
         [HttpPut("{id}")]
-        public Prato Put(int id, [FromBody] Prato prato)
+        public PratoViewModel Put(int id, [FromBody] PratoViewModel prato)
         {
             _repo.Alterar(prato);
             return prato;
@@ -51,7 +53,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<Prato> Delete(int id)
+        public List<PratoViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

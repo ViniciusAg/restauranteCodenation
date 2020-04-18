@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -15,29 +17,29 @@ namespace RestauranteCodenation.Api.Controllers
     public class IngredienteController : ControllerBase
     {
         // repositorio mesmo nome da controller: _repo
-        private readonly IIngredienteRepositorio _repo;
-        public IngredienteController(IIngredienteRepositorio repo)
+        private readonly IIngredienteAplicacao _repo;
+        public IngredienteController(IIngredienteAplicacao repo)
         {
             _repo = repo;
 
         }
         // GET: api/Ingrediente
         [HttpGet]
-        public IEnumerable<Ingrediente> Get()
+        public IEnumerable<IngredienteViewModel> Get()
         {
             return _repo.SelecionarTodos() ;
         }
 
         // GET: api/Ingrediente/5
         [HttpGet("{id}")]
-        public Ingrediente Get(int id)
+        public IngredienteViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/Ingrediente
         [HttpPost]
-        public Ingrediente Post([FromBody] Ingrediente ingrediente)
+        public IngredienteViewModel Post([FromBody] IngredienteViewModel ingrediente)
         {
             _repo.Incluir(ingrediente);
             return ingrediente;
@@ -45,7 +47,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/Ingrediente/5
         [HttpPut]
-        public Ingrediente Put([FromBody] Ingrediente ingrediente)
+        public IngredienteViewModel Put([FromBody] IngredienteViewModel ingrediente)
         {
             _repo.Alterar(ingrediente);
             return ingrediente;
@@ -53,7 +55,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<Ingrediente> Delete(int id)
+        public List<IngredienteViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

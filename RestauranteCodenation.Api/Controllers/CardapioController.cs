@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestauranteCodenation.Application.Interface;
+using RestauranteCodenation.Application.ViewModel;
 using RestauranteCodenation.Data.Repositorio;
 using RestauranteCodenation.Domain;
 using RestauranteCodenation.Domain.Repositorio;
@@ -14,28 +16,28 @@ namespace RestauranteCodenation.Api.Controllers
     [ApiController]
     public class CardapioController : ControllerBase
     {
-        private readonly ICardapioRepositorio _repo;
-        public CardapioController(ICardapioRepositorio repo)
+        private readonly ICardapioAplicacao _repo;
+        public CardapioController(ICardapioAplicacao repo)
         {
             _repo = repo;
         }
         // GET: api/Cardapio
         [HttpGet]
-        public IEnumerable<Cardapio> Get()
+        public IEnumerable<CardapioViewModel> Get()
         {
             return _repo.SelecionarTodos();
         }
 
         // GET: api/Cardapio/5
         [HttpGet("{id}")]
-        public Cardapio Get(int id)
+        public CardapioViewModel Get(int id)
         {
             return _repo.SelecionarPorId(id);
         }
 
         // POST: api/Cardapio
         [HttpPost]
-        public Cardapio Post([FromBody] Cardapio cardapio)
+        public CardapioViewModel Post([FromBody] CardapioViewModel cardapio)
         {
             _repo.Incluir(cardapio);
             return cardapio;
@@ -43,7 +45,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // PUT: api/Cardapio/5
         [HttpPut("{id}")]
-        public Cardapio Put(int id, [FromBody] Cardapio cardapio)
+        public CardapioViewModel Put(int id, [FromBody] CardapioViewModel cardapio)
         {
             _repo.Alterar(cardapio);
             return cardapio;
@@ -51,7 +53,7 @@ namespace RestauranteCodenation.Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public List<Cardapio> Delete(int id)
+        public List<CardapioViewModel> Delete(int id)
         {
             _repo.Excluir(id);
             return _repo.SelecionarTodos();

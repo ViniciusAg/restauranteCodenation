@@ -6,5 +6,6 @@ namespace RestauranteCodenation.Domain.Repositorio
 {
     public interface IPratosIngredientesRepositorio : IRepositorioBase<PratosIngredientes>
     {
+        List<PratosIngredientes> SelecionarCompleto();
     }
 }
